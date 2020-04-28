@@ -1,0 +1,8 @@
+{% for post in posts %}
+    <div style="max-width: 600px; margin: 10px 0; padding: 10px 20px; background: lightgrey;">
+    {% for p in post.ShareCommentary %}
+        <p>{{ p }}</p>
+    {% endfor %}
+        <p><a href="{{ post.ShareLink }}">Published {{ post.Date }} on LinkedIn</a></p>
+    </div>
+{% endfor %}
