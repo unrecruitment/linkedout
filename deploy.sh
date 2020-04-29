@@ -9,5 +9,5 @@ fi
 
 pip3 install pipenv
 pipenv sync
-pipenv run ./process.py
+pipenv run ./generate.py
 find

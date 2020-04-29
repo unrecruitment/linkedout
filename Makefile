@@ -1,4 +1,4 @@
 all: clean
-	./process.py
+	./generate.py
 clean:
 	rm -rf .build
