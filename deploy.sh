@@ -10,4 +10,5 @@ fi
 pip3 install pipenv
 pipenv sync
 pipenv run ./generate.py
+cp _redirects .build/static/
 find
