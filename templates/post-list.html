@@ -1,6 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
 {% for post in posts %}
-    <div style="max-width: 600px; margin: 10px 0; padding: 10px 20px; background: lightgrey;">
+    <div class="post">
+        <p class="post-date"><a href="{{ post.ShareLink }}">{{ post.Date.strftime("%d.%m.%Y %H:%M") }}</a></p>
         {{ post.ShareCommentary|safe }}
-        <p><a href="{{ post.ShareLink }}">Published {{ post.Date }} on LinkedIn</a></p>
     </div>
 {% endfor %}
+{% endblock %}

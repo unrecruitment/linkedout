@@ -1,0 +1,10 @@
+.post {
+    max-width: 600px;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background: lightgrey;
+}
+.post-date {
+    text-align: right;
+    font-weight: bold;
+}
