@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 import os
+import glob
 import logging
 import re
+import datetime
+import types
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -10,7 +13,8 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger()
 
-from linkedin.archives import data
+import ruamel.yaml
+yaml = ruamel.yaml.YAML()
 
 env = Environment(
     loader=FileSystemLoader('templates'),
@@ -33,17 +37,23 @@ def text_to_html(text):
         result.append(p)
     return ''.join(result)
 
+def preprocess(posts):
+    for key, value in posts.items():
+        value['Date'] = datetime.datetime.strptime(key, '%Y-%m-%d %H:%M:%S')
+        yield types.SimpleNamespace(**value)
 
-for person in data.people:
+people = [types.SimpleNamespace(path=path, name=path.split('/')[-1])
+        for path in glob.glob('data/users/*')]
+
+for person in people:
     url = f'/out/{person.name}/'
     os.makedirs(f'{prefix}{url}/posts', exist_ok=True)
-    posts = person.posts
-
-    posts['ShareCommentary'] = posts['ShareCommentary'].apply(text_to_html)
+    with open(f'{person.path}/posts.yaml') as stream:
+        posts = yaml.load(stream)['posts']
 
     # TODO: posts = person.posts[posts['Visibility'] == 'MEMBER_NETWORK')
     #for post in posts.itertuples():
     #    print(post.ShareCommentary)
     render(f'{url}index.html', 'person-detail', url=url)
-    render(f'{url}posts/index.html', 'post-list', posts=posts.itertuples())
-render(f'/index.html', 'index', people=data.people)
+    render(f'{url}posts/index.html', 'post-list', posts=preprocess(posts))
+render(f'/index.html', 'index', people=people)
