@@ -3,7 +3,7 @@
 {% for post in posts %}
     <div class="post">
         <p class="post-date"><a href="{{ post.ShareLink }}">{{ post.Date.strftime("%d.%m.%Y %H:%M") }}</a></p>
-        {{ post.ShareCommentary|safe }}
+        {{ post.ShareCommentary|text_to_html|safe }}
     </div>
 {% endfor %}
 {% endblock %}

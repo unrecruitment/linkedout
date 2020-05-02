@@ -36,6 +36,7 @@ def text_to_html(text):
         p = '<p>' + p.replace('\n', '<br>') + '</p>'
         result.append(p)
     return ''.join(result)
+env.filters['text_to_html'] = text_to_html
 
 def preprocess(posts):
     for key, value in posts.items():
