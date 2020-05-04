@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% for post in posts %}
-    {% set post_id = 'post-' + post.Date.strftime("%d%m%Y-%H%M") %}
+    {% set post_id = 'post-' + post.Date.strftime("%Y%m%d-%H%M%S") %}
     <div class="post" id="{{ post_id }}">
         <p class="post-link"><a href="#{{ post_id }}">🔗</a></p>
         <p class="post-date"><a href="{{ post.ShareLink }}">{{ post.Date.strftime("%d.%m.%Y %H:%M") }}</a></p>
