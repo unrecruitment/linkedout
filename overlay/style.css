@@ -17,3 +17,6 @@
 .post-text {
     clear: both;
 }
+:target {
+    background-color: lightblue;
+}
