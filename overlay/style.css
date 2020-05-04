@@ -4,7 +4,16 @@
     padding: 10px 20px;
     background: lightgrey;
 }
+.post-link {
+    float: left;
+}
+.post-link a {
+    text-decoration: none;
+}
 .post-date {
+    float: right;
     text-align: right;
-    font-weight: bold;
+}
+.post-text {
+    clear: both;
 }
