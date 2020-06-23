@@ -10,6 +10,6 @@ fi
 pip3 install pipenv
 pipenv sync
 pipenv run ./generate.py
-mkdir build_dir
+mkdir -p build_dir
 cp -r -T overlay build_dir/static
 find
