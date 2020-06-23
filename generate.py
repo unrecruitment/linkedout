@@ -21,7 +21,7 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )
 
-prefix = '.build/static'
+prefix = 'build_dir/static'
 
 def render(target, template, **kwargs):
     with open(f'{prefix}{target}', 'w') as stream:
