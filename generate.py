@@ -48,6 +48,8 @@ people = [types.SimpleNamespace(path=path, name=path.split('/')[-1])
 
 for person in people:
     url = f'/out/{person.name}/'
+    with open(f'{person.path}/name') as stream:
+        person.fullname = stream.read().strip()
     os.makedirs(f'{prefix}{url}/posts', exist_ok=True)
     with open(f'{person.path}/posts.yaml') as stream:
         posts = yaml.load(stream)['posts']
@@ -55,6 +57,6 @@ for person in people:
     # TODO: posts = person.posts[posts['Visibility'] == 'MEMBER_NETWORK')
     #for post in posts.itertuples():
     #    print(post.ShareCommentary)
-    render(f'{url}index.html', 'person-detail', url=url)
+    #render(f'{url}index.html', 'person-detail', url=url)
     render(f'{url}posts/index.html', 'post-list', posts=preprocess(posts))
 render(f'/index.html', 'index', people=people)

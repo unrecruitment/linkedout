@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 {% for person in people %}
-    <p><a href="./out/{{ person.name }}">{{ person.name }}/</a></p>
+    <p><a href="./out/{{ person.name }}/posts">{{ person.fullname }}/</a></p>
 {% endfor %}
 {% endblock %}
