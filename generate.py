@@ -32,7 +32,7 @@ def text_to_html(text):
         return ''
     result = []
     for p in text.split('\n\n'):
-        p = re.sub(r'#([a-zA-Z0-9]+)', r'<b>#\1</b>', p)
+        p = re.sub(r'#(\w+)', r'<b>#\1</b>', p)
         p = '<p>' + p.replace('\n', '<br>') + '</p>'
         result.append(p)
     return ''.join(result)
