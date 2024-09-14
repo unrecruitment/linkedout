@@ -33,7 +33,7 @@ def text_to_html(text):
     result = []
     for p in text.split('\n\n'):
         p = re.sub(r'#(\w+)', r'<b>#\1</b>', p)
-        p = '<p>' + p.replace('\n', '<br>') + '</p>'
+        p = '<p>' + p.replace('"\n"', '<br>') + '</p>'
         result.append(p)
     return ''.join(result)
 env.filters['text_to_html'] = text_to_html
