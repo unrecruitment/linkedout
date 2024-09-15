@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+
+<div class="input-wrapper">
+Keyword Search:&nbsp;<input type="text" id="keywordInput" placeholder="Enter keywords" oninput="filterPosts()">
+<button id="clearButton" onclick="clearInput()">Clear</button>
+</div>
+
+<p id="postCount"></p>
+
 {% for post in posts %}
     {% set post_id = 'post-' + post.Date.strftime("%Y%m%d-%H%M%S") %}
     <div class="post" id="{{ post_id }}">
@@ -10,4 +18,46 @@
         </div>
     </div>
 {% endfor %}
+
+<script>
+// Function to filter posts based on input and update count
+function filterPosts() {
+  // Get the input value and split it into keywords
+  const input = document.getElementById('keywordInput').value.toLowerCase();
+  const keywords = input.split(' ').filter(keyword => keyword); // Remove empty strings
+
+  // Get all posts
+  const posts = document.querySelectorAll('.post');
+  let visibleCount = 0; // Counter for visible posts
+
+  // Loop through each post and check if all keywords are found
+  posts.forEach(post => {
+    const text = post.textContent.toLowerCase();
+
+    // If no keywords, show all posts, otherwise filter
+    const isMatch = keywords.length === 0 || keywords.every(keyword => text.includes(keyword));
+
+    // Toggle visibility based on the match result
+    if (isMatch) {
+      post.classList.remove('hidden');
+      visibleCount++; // Increase count if post is visible
+    } else {
+      post.classList.add('hidden');
+    }
+  });
+
+  // Update the visible post count
+  document.getElementById('postCount').textContent = `Showing ${visibleCount} post${visibleCount !== 1 ? 's' : ''}.`;
+}
+
+// Function to clear the input field and show all posts
+function clearInput() {
+  document.getElementById('keywordInput').value = ''; // Clear the input
+  filterPosts(); // Call filterPosts to reset visibility
+}
+
+// Initialize post count on page load
+filterPosts();
+</script>
+
 {% endblock %}
