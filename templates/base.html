@@ -3,11 +3,38 @@
 <head>
     <meta charset="utf-8">
     <title>LinkedOut</title>
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <style type="text/css">
+        body {
+            background: #202020;
+            color: #e0ffff;
+            /* font-size: 14px; */
+        }
+        .post {
+            max-width: 992px;
+            margin: 16px 0;
+            padding: 10px 20px;
+            background: #101010;
+        }
+        .post-link {
+            float: left;
+        }
+        .post-link a {
+            text-decoration: none;
+        }
+        .post-date {
+            float: right;
+            text-align: right;
+        }
+        .post-text {
+            clear: both;
+        }
+        :target {
+            background-color: lightblue;
+        }
+    </style>
 </head>
 <body>
     {% block content %}
     {% endblock %}
 </body>
 </html>
-
