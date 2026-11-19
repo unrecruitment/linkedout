@@ -119,16 +119,11 @@ deployment settings and the exact data-repository URL are not recorded here.
 The untracked export supplied with this checkout is
 `Complete_LinkedInDataExport_07-06-2026.zip`. It contains 2,123 shares through
 `2026-07-05 08:54:16`, but LinkedIn names its CSV `Shares_551084893.csv`.
-`data/linkedin/archives.py` only opens the exact member name `Shares.csv`, so
-the supplied export does **not** process with the current code. Do not replace
-the published YAML until this is fixed and the generated result has been
-checked. The older 2024 export in the data checkout used the format that
-produced the current public archive.
-
-The likely next technical change is to locate the shares CSV by a stable rule
-(for example, a filename beginning with `Shares`) and validate its columns.
-That change should also define how an export is selected when a ZIP contains
-several similarly named files.
+`data/linkedin/archives.py` now locates the single CSV whose filename begins
+with `Shares`, while still supporting the old exact `Shares.csv` name. It
+fails explicitly if no shares CSV or more than one candidate is present.
+The local update produced 2,119 unique posts through that date. The four-row
+difference is due to duplicate timestamps removed by the updater.
 
 ## Decisions To Fill In
 
@@ -144,8 +139,8 @@ before the next publishing run:
 - Whether historical changes found during an update should be accepted as
   authoritative, manually reviewed one by one, or tracked in a separate
   changelog; define the minimum detail required for that record.
-- Whether the updater should support LinkedIn's changing shares filenames,
-  and what validation/failure message is required.
+- Whether the updater's current `Shares*.csv` matching rule is sufficient if
+  LinkedIn supplies more than one shares-like file in a future export.
 - Whether posts with missing visibility or other metadata should be published;
   the visibility filter is currently only a TODO in `generate.py`.
 - Whether generated `build_dir/` should remain local-only or be published as
