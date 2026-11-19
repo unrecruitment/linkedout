@@ -1,3 +1,6 @@
 /.build
+/build_dir/
+
+*_LinkedInDataExport_*.zip
 
 __pycache__
