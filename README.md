@@ -116,14 +116,14 @@ deployment settings and the exact data-repository URL are not recorded here.
 
 ## Current Export Status
 
-The untracked export supplied with this checkout is
-`Complete_LinkedInDataExport_07-06-2026.zip`. It contains 2,123 shares through
-`2026-07-05 08:54:16`, but LinkedIn names its CSV `Shares_551084893.csv`.
-`data/linkedin/archives.py` now locates the single CSV whose filename begins
-with `Shares`, while still supporting the old exact `Shares.csv` name. It
-fails explicitly if no shares CSV or more than one candidate is present.
-The local update produced 2,119 unique posts through that date. The four-row
-difference is due to duplicate timestamps removed by the updater.
+The latest checked export is `Complete_LinkedInDataExport_11-19-2026.zip.zip`.
+It contains 2,195 share rows through `2026-11-17 10:12:07`; the updater
+produced 2,191 unique posts after removing duplicate timestamps. It added 72
+posts, removed none, and changed one older record by adding `MediaUrl`.
+
+`data/linkedin/archives.py` supports both LinkedIn's old `Shares.csv` name and
+newer names beginning with `Shares`. It fails explicitly if no shares CSV or
+more than one candidate is present.
 
 ## Decisions To Fill In
 
